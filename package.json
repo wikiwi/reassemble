@@ -1,0 +1,89 @@
+{
+  "name": "reassemble",
+  "version": "0.3.0",
+  "description": "Tools and Building Blocks for the Composition of React Higher-Order-Components.",
+  "homepage": "https://github.com/wikiwi/reassemble",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wikiwi/reassemble.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wikiwi/reassemble/issues"
+  },
+  "files": [
+    "dist",
+    "lib",
+    "cjs"
+  ],
+  "module": "./lib/index.js",
+  "jsnext:main": "./lib/index.js",
+  "main": "./cjs/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "all": "npm run lint && npm run test:coverage && npm run build",
+    "bench": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node",
+    "build": "gulp && webpack && cross-env BUILD_MINIFIED=true webpack",
+    "clean": "rm -r -f dist lib cjs coverage",
+    "ci:coveralls": "cat coverage/lcov.info | coveralls",
+    "release": "npm version -m 'reassemble release %s'",
+    "lint": "gulp lint",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --opts mocha.opts",
+    "test:coverage": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"inlineSourceMap\":\"true\"}' nyc mocha --opts mocha.opts",
+    "test:watch": "npm run test:unit -- --watch"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "react",
+    "hoc",
+    "composition",
+    "recompose"
+  ],
+  "author": "Chi Vinh Le and contributors (https://github.com/wikiwi/reassemble/graphs/contributors)",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0-0"
+  },
+  "devDependencies": {
+    "@types/benchmark": "^1.0.30",
+    "@types/chai": "^3.4.34",
+    "@types/enzyme": "^2.5.37",
+    "@types/jsdom": "^2.0.29",
+    "@types/mocha": "^2.2.32",
+    "@types/react": "^15.0.4",
+    "@types/react-dom": "^0.14.21",
+    "@types/recompose": "^0.20.2",
+    "@types/sinon": "^1.16.31",
+    "awesome-typescript-loader": "^3.0.0-beta.17",
+    "benchmark": "^2.1.3",
+    "cash-rm": "^0.2.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.14",
+    "cross-env": "^3.1.3",
+    "enzyme": "^2.5.1",
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb-base": "^9.0.0",
+    "eslint-plugin-import": "^2.0.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-jsonlint": "^1.1.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-tslint": "^7.0.1",
+    "gulp-typescript": "^3.1.3",
+    "gulp-yaml-validate": "^1.0.2",
+    "jsdom": "^9.9.1",
+    "merge2": "^1.0.2",
+    "mocha": "^3.1.2",
+    "nyc": "^10.1.2",
+    "react": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "recompose": "^0.21.2",
+    "sinon": "^2.0.0-pre.4",
+    "ts-node": "^2.0.0",
+    "tslint": "^4.1.1",
+    "typescript": "^2.1.5",
+    "webpack": "^2.2.0-rc.1"
+  }
+}

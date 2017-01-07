@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- 6
+script:
+- npm run all
+after_success:
+- bash <(curl -s https://codecov.io/bash)
+deploy:
+  provider: npm
+  on:
+    repo: wikiwi/reassemble
+    tags: true
+    node: 6
+  skip_cleanup: true
+  email: vinh@wikiwi.io
+  api_key:
+    secure: Z1w2n52kf0ji2SR/sxKj0K+fveT6EAM71FU799lIYlxO1QBQzauAwH275wd7M8AuTdk6Ica0MQP0e61CAJ11f6T9H/qFw0HgV2Xu1Ltj43aN+rBAxF3RlIcVcs/9V2B6KalxqgcOFidAeJI6rLmyVffaB9w+ZCvrRHnnxBB/tks2n6wvfh4vcYQYE839bOq/lmvkAvTAFTQeMEzzHTPQySKkHxfpuLuigR9y8joHQ3g9gDpcV+s32fIwjQbYVg6HdpsEtMxfkgW94t3WjoCn1OPfVI/ZyqkwIsJM1rQRt6zdV/448UC7blY4pumr1SN1cHI6T9wXuwuCX3hWQv5UPL1jfhH/3QfH91EUCdW9T8Hcd0SHV1dG+V5UDTQ3NV386CJU0WWb+RvqmASQGfv8JaKHW972ODHtpZ54XTKSXsl2ba0kYBpnrvzXlyCmc2p5TZUXY/KwGCc4Kih1+IGtyL4fgor2KYY8Afuq5sUtaDeSPGYDUVtLptlZRVrztBgDKyqAPZTGTb6dgmO5GENYW9KF6SCNf/79nf/Hv5uvA5ppFLC+WEy2Qjw2zh8FcIczu6bVyi3whWYNFRNcJYljdgBS5zkRhlLtfsjufNrQUBQVTKBG2WCtZYTaBWp00O4R357el1hSCjnKJy8XxdzI6/GPkXmsHaFiNNlfFLlhpHw=

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "es6",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./"
+  },
+  "include": [
+    "./src/**/*.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./test/**/*.ts",
+    "./test/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

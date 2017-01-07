@@ -1,0 +1,19 @@
+{
+  "reporter": [
+    "lcov",
+    "text"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx"
+  ],
+  "extension": [
+    ".ts",
+    ".tsx"
+  ],
+  "produce-source-map": true
+}
