@@ -27,8 +27,8 @@
     "ci:coveralls": "cat coverage/lcov.info | coveralls",
     "release": "npm version -m 'reassemble release %s'",
     "lint": "gulp lint",
-    "test": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha --opts mocha.opts",
-    "test:coverage": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"inlineSourceMap\":\"true\"}' nyc mocha --opts mocha.opts",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' --all mocha --opts mocha.opts",
+    "test:coverage": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' nyc mocha --opts mocha.opts",
     "test:watch": "npm run test:unit -- --watch"
   },
   "engines": {
