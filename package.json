@@ -1,7 +1,7 @@
 {
   "name": "reassemble",
   "version": "0.4.0",
-  "description": "Tools and Building Blocks for the Composition of React Higher-Order-Components.",
+  "description": "Fast Library for the Composition of React Higher-Order-Components",
   "homepage": "https://github.com/wikiwi/reassemble",
   "repository": {
     "type": "git",
