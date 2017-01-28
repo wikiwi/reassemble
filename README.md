@@ -2,12 +2,14 @@
 
 _reassemble_ is a library for the composition of React Higher-Order-Components optimized for performance.
 
+_word of caution: this is still under heavy development_
+
 [![NPM Version Widget]][npm version]
 [![Build Status Widget]][build status]
 [![Coverage Widget]][coverage]
 
 ## reassemble vs recompose
-In most cases _reassemble_ is  a drop-in replacement for [_recompose_](https://github.com/acdlite/recompose). Conceptually both projects differ in such way that _recompose_ uses HOCs as there building blocks, whereas _reassemble_ uses _Composables_ which are just a collection of callbacks. Most noticeably is that using _reassemble_ only results in a single Higher-Order-Component and thus has a significant higher performance. It also solves the problem of [Dev Tools Ballooning](https://cloud.githubusercontent.com/assets/5077042/12974970/4c6b7d3a-d0c9-11e5-9b92-9cee3b015f8c.png) which is an issue in _recompose_.
+In most cases _reassemble_ is  a drop-in replacement for [_recompose_](https://github.com/acdlite/recompose). Conceptually both projects differ in such way that _recompose_ uses HOCs as their building blocks, whereas _reassemble_ uses _Composables_ which are just a collection of callbacks. Most noticeably using _reassemble_ only results in a single Higher-Order-Component and thus has a significant higher performance. It also solves the problem of [Dev Tools Ballooning](https://cloud.githubusercontent.com/assets/5077042/12974970/4c6b7d3a-d0c9-11e5-9b92-9cee3b015f8c.png) which is an issue in _recompose_.
 
 ## Installation
 
