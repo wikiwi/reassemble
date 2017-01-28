@@ -91,6 +91,39 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 | [wrapDisplayName][docs wrapDisplayName]               | ✅        ||
 | [toClass][docs toClass]                               | TODO      | This is a noOp `assemble` always results in a class |
 
+## Composables introduced by reassemble
+
+ * [`debug()`](#debug)
+ * [`noOp()`](#noop)
+ * [`isolate()`](#isolate)
+ * [`integrate()`](#integrate)
+ * [`onWillMount()`](#onwillmount)
+ * [`onDidMount()`](#ondidmount)
+ * [`onWillUnmount()`](#onwillunmount)
+ * [`onWillReceiveProps()`](#onwillreceiveprops)
+ * [`onWillUpdate()`](#onwillupdate)
+ * [`onDidUpdate()`](#ondidupdate)
+
+### `debug()`
+
+### `noOp()`
+
+### `isolate()`
+
+### `integrate()`
+
+### `onWillMount()`
+
+### `onDidMount()`
+
+### `onWillUnmount()`
+
+### `onWillReceiveProps()`
+
+### `onWillUpdate()`
+
+### `onDidUpdate()`
+
 [docs branch]: https://github.com/acdlite/recompose/blob/master/docs/API.md#branch
 [docs defaultProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#defaultprops
 [docs flattenProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#flattenprops
