@@ -91,7 +91,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 | [withReducer][docs withReducer]                       | ✅        ||
 | [withState][docs withState]                           | ✅        ||
 | [wrapDisplayName][docs wrapDisplayName]               | ✅        ||
-| [toClass][docs toClass]                               | TODO      | This is a noOp `assemble` always results in a class |
+| [toClass][docs toClass]                               | TODO      | This is a noOp as `assemble` always results in a class |
 
 ## Composables introduced by reassemble
 
