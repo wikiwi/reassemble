@@ -103,22 +103,70 @@ _reassemble_ is written in typescript and as such comes with its own definitions
  * [`onWillReceiveProps()`](#onwillreceiveprops)
  * [`onWillUpdate()`](#onwillupdate)
  * [`onDidUpdate()`](#ondidupdate)
-
+ 
 ### `debug()`
+
+```ts
+debug(info?: string): Composable
+```
+
+Logs current props to console. Optionally pass an info string which logged before the props.
 
 ### `noOp`
 
+```ts
+noOp: Composable
+```
+
+Does nothing.
+
 ### `onWillMount()`
+
+```ts
+onWillMount(props): Composable
+```
+
+Called during lifecycle `componentWillMount()`
 
 ### `onDidMount()`
 
+```ts
+onDidMount(props): Composable
+```
+
+Called during lifecycle `componentDidMount()`
+
 ### `onWillUnmount()`
+
+```ts
+onWillUnmount(props): Composable
+```
+
+Called during lifecycle `componentWillUnmount()`
 
 ### `onWillReceiveProps()`
 
+```ts
+onWillReceiveProps(prevProps, nextProps): Composable
+```
+
+Called during lifecycle `componentWillReceiveProps()` and when state changes because some props are derived from state.
+
 ### `onWillUpdate()`
 
+```ts
+onWillUpdate(prevProps, nextProps): Composable
+```
+
+Called during lifecycle `componentWillUpdate()`
+
 ### `onDidUpdate()`
+
+```ts
+onDidUpdate(prevProps, nextProps): Composable
+```
+
+Called during lifecycle `componentDidUpdate()`
 
 [docs branch]: https://github.com/acdlite/recompose/blob/master/docs/API.md#branch
 [docs defaultProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#defaultprops
