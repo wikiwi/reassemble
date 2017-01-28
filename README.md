@@ -37,7 +37,7 @@ _Note: `assemble` is also exported with the alias `compose` to allow easy transi
 | [defaultProps][docs defaultProps]                     | ✅       ||
 | [flattenProps][docs flattenProps]                     | ✅       ||
 | [getContext][docs getContext]                         | ✅       ||
-| [lifecycle][docs lifecycle]                           | TODO     ||
+| [lifecycle][docs lifecycle]                           | TODO     | Access instance via `this` is not supported |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | Needs further investigation |
 | [omitProps][docs omitProps]                           | ✅       ||
