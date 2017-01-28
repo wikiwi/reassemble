@@ -69,7 +69,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 | [defaultProps][docs defaultProps]                     | ✅       ||
 | [flattenProps][docs flattenProps]                     | ✅       ||
 | [getContext][docs getContext]                         | ✅       ||
-| [lifecycle][docs lifecycle]                           | TODO     | Instance access via `this` is not supported |
+| [lifecycle][docs lifecycle]                           | TODO     | Instance access via `this` is not supported |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | Needs further investigation |
 | [omitProps][docs omitProps]                           | ✅       ||
@@ -91,7 +91,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 | [withReducer][docs withReducer]                       | ✅        ||
 | [withState][docs withState]                           | ✅        ||
 | [wrapDisplayName][docs wrapDisplayName]               | ✅        ||
-| [toClass][docs toClass]                               | TODO      | This is a noOp as `assemble` always results in a class |
+| [toClass][docs toClass]                               | TODO      | This is a noOp as `assemble` always results in a class |
 
 ## Composables introduced by reassemble
 
