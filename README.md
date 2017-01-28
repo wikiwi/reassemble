@@ -53,7 +53,7 @@ export const withClickCounter = combine(
 );
 ```
 
-This is also useful for some _Composables_ like `branch` that takes a _Composable_ as an argument.
+This is also useful for some _Composables_ like `branch` that takes another _Composable_ as an argument.
 
 ## Note for Typescript users
 
