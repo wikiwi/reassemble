@@ -96,7 +96,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 ## Composables introduced by reassemble
 
  * [`debug()`](#debug)
- * [`noOp()`](#noop)
+ * [`noOp`](#noop)
  * [`onWillMount()`](#onwillmount)
  * [`onDidMount()`](#ondidmount)
  * [`onWillUnmount()`](#onwillunmount)
@@ -106,7 +106,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 
 ### `debug()`
 
-### `noOp()`
+### `noOp`
 
 ### `onWillMount()`
 
