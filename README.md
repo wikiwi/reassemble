@@ -62,32 +62,32 @@ _Note: `assemble` is also exported with the alias `compose` to allow easy transi
 | [toClass][docs toClass]                               | TODO      | This is a noOp `assemble` always results in a class |
 
 [docs branch]: https://github.com/acdlite/recompose/blob/master/docs/API.md#branch
-[docs defaultProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#defaultProps
-[docs flattenProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#flattenProps
-[docs getContext]: https://github.com/acdlite/recompose/blob/master/docs/API.md#getContext
+[docs defaultProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#defaultprops
+[docs flattenProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#flattenprops
+[docs getContext]: https://github.com/acdlite/recompose/blob/master/docs/API.md#getcontext
 [docs lifecycle]: https://github.com/acdlite/recompose/blob/master/docs/API.md#lifecycle
-[docs mapProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#mapProps
-[docs mapPropsStream]: https://github.com/acdlite/recompose/blob/master/docs/API.md#mapPropsStream
-[docs omitProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#omitProps
-[docs onlyUpdateForKeys]: https://github.com/acdlite/recompose/blob/master/docs/API.md#onlyUpdateForKeys
-[docs onlyUpdateForPropTypes]: https://github.com/acdlite/recompose/blob/master/docs/API.md#onlyUpdateForPropTypes
-[docs renameProp]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renameProp
-[docs renameProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renameProps
-[docs renderComponent]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renderComponent
-[docs renderNothing]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renderNothing
-[docs setDisplayName]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setDisplayName
-[docs setPropTypes]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setPropTypes
-[docs setStatic]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setStatic
-[docs shouldUpdate]: https://github.com/acdlite/recompose/blob/master/docs/API.md#shouldUpdate
+[docs mapProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#mapprops
+[docs mapPropsStream]: https://github.com/acdlite/recompose/blob/master/docs/API.md#mappropsstream
+[docs omitProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#omitprops
+[docs onlyUpdateForKeys]: https://github.com/acdlite/recompose/blob/master/docs/API.md#onlyupdateforkeys
+[docs onlyUpdateForPropTypes]: https://github.com/acdlite/recompose/blob/master/docs/API.md#onlyupdateforproptypes
+[docs renameProp]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renameprop
+[docs renameProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#renameprops
+[docs renderComponent]: https://github.com/acdlite/recompose/blob/master/docs/API.md#rendercomponent
+[docs renderNothing]: https://github.com/acdlite/recompose/blob/master/docs/API.md#rendernothing
+[docs setDisplayName]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setdisplayname
+[docs setPropTypes]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setproptypes
+[docs setStatic]: https://github.com/acdlite/recompose/blob/master/docs/API.md#setstatic
+[docs shouldUpdate]: https://github.com/acdlite/recompose/blob/master/docs/API.md#shouldupdate
 [docs pure]: https://github.com/acdlite/recompose/blob/master/docs/API.md#pure
-[docs withContext]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withContext
-[docs withHandlers]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withHandlers
-[docs withProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withProps
-[docs withPropsOnChange]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withPropsOnChange
-[docs withReducer]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withReducer
-[docs withState]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withState
-[docs wrapDisplayName]: https://github.com/acdlite/recompose/blob/master/docs/API.md#wrapDisplayName
-[docs toClass]: https://github.com/acdlite/recompose/blob/master/docs/API.md#toClass
+[docs withContext]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withcontext
+[docs withHandlers]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withhandlers
+[docs withProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withprops
+[docs withPropsOnChange]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withpropsonchange
+[docs withReducer]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer
+[docs withState]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate
+[docs wrapDisplayName]: https://github.com/acdlite/recompose/blob/master/docs/API.md#wrapdisplayname
+[docs toClass]: https://github.com/acdlite/recompose/blob/master/docs/API.md#toclass
 
 [npm version]: https://www.npmjs.com/package/reassemble
 
