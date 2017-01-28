@@ -29,6 +29,36 @@ const EnhancedComponent = enhance(BaseComponent);
 
 _Note: `assemble` is also exported with the alias `compose` to allow easy transition from recompose to reassemble_
 
+### Size optimization
+
+_reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectifely reduce file size. 
+
+For ES5 projects you can directly import required modules:
+
+```js
+const mapProps = require("reassemble/cjs/mapProps")
+const withState = require("reassemble/cjs/withState")
+```
+
+## Combining
+
+Multiple _Composables_ can be combined into one using `combine()` which makes it easy to define your own:
+
+```js
+export const withClickCounter = combine(
+  withState('counter', 'setCounter', 0),
+  withHandlers({
+    onClick: ({counter, setCounter}) => setCounter(counter + 1),
+  }),
+);
+```
+
+This is also useful for some _Composables_ like `branch` that takes a _Composable_ as an argument.
+
+## Note for Typescript users
+
+_reassemble_ is written in typescript and as such comes with its own definitions. They do not follow the same type definitions as _recompose_ so some manual work is required here.
+
 ## Support of recompose HOCs as Composables
 
 | Name                                                  | Support | Remarks |
