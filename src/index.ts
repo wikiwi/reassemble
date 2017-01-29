@@ -9,6 +9,7 @@
 export * from "./assemble";
 export * from "./blueprint";
 export * from "./combine";
+export * from "./compose";
 export * from "./debug";
 export * from "./defaultProps";
 export * from "./flattenProp";
