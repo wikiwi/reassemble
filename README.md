@@ -110,7 +110,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 debug(info?: string): Composable
 ```
 
-Logs current props to console. Optionally pass an info string which logged before the props.
+Logs current props to the console. Optionally pass an info string which logged before the props.
 
 ### `noOp`
 
