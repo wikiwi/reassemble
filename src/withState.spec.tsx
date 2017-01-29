@@ -56,11 +56,14 @@ describe("withState", () => {
         withProps(({counter}) => ({ counter1: counter })),
         withState("counter", "setCounter", 10),
         withProps(({counter}) => ({ counter2: counter })),
+        withState("counter", "setCounter", 15),
+        withProps(({counter}) => ({ counter3: counter })),
       );
       const Assembly = assemble(composable)(Component);
       const wrapper = shallow(<Assembly />);
       assert.strictEqual(wrapper.props().counter1, 5);
       assert.strictEqual(wrapper.props().counter2, 10);
+      assert.strictEqual(wrapper.props().counter3, 15);
     });
   });
 });

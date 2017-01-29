@@ -79,6 +79,7 @@
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
+    "recompact": "^1.1.0",
     "recompose": "^0.21.2",
     "sinon": "^2.0.0-pre.4",
     "ts-node": "^2.0.0",
