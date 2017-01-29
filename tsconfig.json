@@ -5,8 +5,6 @@
     "moduleResolution": "node",
     "jsx": "react",
     "noImplicitAny": true,
-    "noUnusedParameters": true,
-    "noUnusedLocals": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./"
   },

@@ -12,6 +12,9 @@
     "ordered-imports": false,
     "max-classes-per-file": false,
     "prefer-for-of": false,
+    "no-unused-variable": [true, "react", {
+      "ignore-pattern": "^_"
+    }],
     "variable-name": [true,
       "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"
     ]
