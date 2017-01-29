@@ -8,13 +8,13 @@
 
 import { Composable, propsCallback } from "./blueprint";
 
-export function debug(
-  info?: string,
+export function debug<T>(
+  callback: (props: T) => void = console.log,
 ): Composable {
   return {
     instanceCallbacks: [
       propsCallback((props) => {
-        info ? console.log(info, props) : console.log(props); /* tslint:disable-line: no-console */
+        callback(props);
         return props;
       }),
     ],
