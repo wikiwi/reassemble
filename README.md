@@ -33,7 +33,7 @@ _Note: `assemble` is also exported with the alias `compose` to allow easy transi
 
 ### Size optimization
 
-_reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectifely reduce file size.
+_reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectively reduce file size.
 
 For ES5 projects you can directly import required modules:
 
