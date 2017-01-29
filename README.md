@@ -33,7 +33,7 @@ _Note: `assemble` is also exported with the alias `compose` to allow easy transi
 
 ### Size optimization
 
-_reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectifely reduce file size. 
+_reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectifely reduce file size.
 
 For ES5 projects you can directly import required modules:
 
@@ -69,29 +69,29 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 | [defaultProps][docs defaultProps]                     | ✅       ||
 | [flattenProps][docs flattenProps]                     | ✅       ||
 | [getContext][docs getContext]                         | ✅       ||
-| [lifecycle][docs lifecycle]                           | TODO     | Instance access via `this` is not supported |
+| [lifecycle][docs lifecycle]                           | TODO    | Instance access via `this` is not supported |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | Needs further investigation |
 | [omitProps][docs omitProps]                           | ✅       ||
-| [onlyUpdateForKeys][docs onlyUpdateForKeys]           | TODO     ||
-| [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | TODO     ||
+| [onlyUpdateForKeys][docs onlyUpdateForKeys]           | TODO    ||
+| [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | TODO    ||
 | [renameProp][docs renameProp]                         | ✅       ||
 | [renameProps][docs renameProps]                       | ✅       ||
-| [renderComponent][docs renderComponent]               | TODO     ||
-| [renderNothing][docs renderNothing]                   | TODO     ||
-| [setDisplayName][docs setDisplayName]                 | ✅        ||
-| [setPropTypes][docs setPropTypes]                     | TODO      ||
-| [setStatic][docs setStatic]                           | ✅        ||
-| [shouldUpdate][docs shouldUpdate]                     | ✅        ||
-| [pure][docs pure]                                     | TODO      ||
-| [withContext][docs withContext]                       | TODO      ||
-| [withHandlers][docs withHandlers]                     | ✅        ||
-| [withProps][docs withProps]                           | ✅        ||
-| [withPropsOnChange][docs withPropsOnChange]           | ✅        ||
-| [withReducer][docs withReducer]                       | ✅        ||
-| [withState][docs withState]                           | ✅        ||
-| [wrapDisplayName][docs wrapDisplayName]               | ✅        ||
-| [toClass][docs toClass]                               | TODO      | This is a noOp as `assemble` always results in a class |
+| [renderComponent][docs renderComponent]               | TODO    ||
+| [renderNothing][docs renderNothing]                   | TODO    ||
+| [setDisplayName][docs setDisplayName]                 | ✅       ||
+| [setPropTypes][docs setPropTypes]                     | TODO    ||
+| [setStatic][docs setStatic]                           | ✅       ||
+| [shouldUpdate][docs shouldUpdate]                     | ✅       ||
+| [pure][docs pure]                                     | TODO    ||
+| [withContext][docs withContext]                       | TODO    ||
+| [withHandlers][docs withHandlers]                     | ✅       ||
+| [withProps][docs withProps]                           | ✅       ||
+| [withPropsOnChange][docs withPropsOnChange]           | ✅       ||
+| [withReducer][docs withReducer]                       | ✅       ||
+| [withState][docs withState]                           | ✅       ||
+| [wrapDisplayName][docs wrapDisplayName]               | ✅       ||
+| [toClass][docs toClass]                               | TODO    ||
 
 ## Composables introduced by reassemble
 
@@ -103,7 +103,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
  * [`onWillReceiveProps()`](#onwillreceiveprops)
  * [`onWillUpdate()`](#onwillupdate)
  * [`onDidUpdate()`](#ondidupdate)
- 
+
 ### `debug()`
 
 ```ts
