@@ -35,11 +35,18 @@ _Note: `assemble` is also exported with the alias `compose` to allow easy transi
 
 _reassemble_ exports also as ES6 modules and as such _tree shaking_ (e.g. with _webpack 2_) can be used to effectively reduce file size.
 
-For ES5 projects you can directly import required modules:
+Without _tree shaking_ you can import the modules explicitly:
 
 ```js
-const mapProps = require("reassemble/cjs/mapProps")
-const withState = require("reassemble/cjs/withState")
+import mapProps from "reassemble/lib/mapProps"
+import withState from "reassemble/lib/withState"
+```
+
+And for ES5 projects:
+
+```js
+const mapProps = require("reassemble/cjs/mapProps").mapProps
+const withState = require("reassemble/cjs/withState").withState
 ```
 
 ## Combining
