@@ -110,7 +110,7 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 
  * [`debug()`](#debug)
  * [`noOp`](#noop)
- * [`omitProps()`](#omitProps)
+ * [`omitProps()`](#omitprops)
  * [`isolate()`](#isolate)
  * [`integrate()`](#integrate)
  * [`onWillMount()`](#onwillmount)
