@@ -3,3 +3,5 @@
 test/setupDOM.ts
 src/**/*.spec.tsx
 src/**/*.spec.ts
+test/**/*.test.tsx
+test/**/*.test.ts

@@ -6,7 +6,8 @@
     "jsx": "react",
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "lib": ["DOM", "ES5", "ScriptHost", "ES2015.Symbol", "ES2015.Core"]
   },
   "include": [
     "./src/**/*.d.ts",

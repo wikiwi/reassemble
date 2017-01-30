@@ -57,6 +57,12 @@ export const withClickCounter = combine(
 
 This is also useful for some _Composables_ like `branch` that takes another _Composable_ as an argument.
 
+## Support for Symbols
+
+Most of the _Composables_ supports the use of [ES6 Symbols](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Symbol). You can use _Symbols_ to pass _hidden_ props among your _Composables_.
+
+_* In some cases Typescript users will [lose type information](https://github.com/Microsoft/TypeScript/issues/5579)._
+
 ## Note for Typescript users
 
 _reassemble_ is written in typescript and as such comes with its own definitions. They do not follow the same type definitions as _recompose_ so some manual work is required here.

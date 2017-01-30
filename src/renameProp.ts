@@ -10,7 +10,7 @@ import { Composable } from "./blueprint";
 import mapProps from "./mapProps";
 import omit from "./utils/omit";
 
-export function renameProp<TOld extends string, TNew extends string>(
+export function renameProp<TOld extends string | symbol, TNew extends string | symbol>(
   oldName: TOld,
   newName: TNew,
 ): Composable {

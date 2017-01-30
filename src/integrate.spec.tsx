@@ -30,6 +30,7 @@ describe("integrate", () => {
     const wrapper = shallow(<Assembly />);
     assert.deepEqual(wrapper.props(), { a: 1, b: 3, c: 4 });
   });
+
   it("should nest", () => {
     const composables: Composable[] = [
       withProps({ a: 1, b: 2 }),
@@ -37,9 +38,9 @@ describe("integrate", () => {
         withProps({ b: 3 }),
         isolate(
           withProps({ a: 2, c: 3 }),
-          integrate<any>("a", "c"),
+          integrate("a", "c"),
         ),
-        integrate<any>("a", "b"),
+        integrate("a", "b"),
       ),
     ];
     const Assembly = assemble(...composables)(Component);

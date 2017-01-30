@@ -13,20 +13,20 @@ import resolveValue from "./utils/resolveValue";
 export type Reducer<TState, TAction> = (s: TState, a: TAction) => TState;
 
 export function withReducer(
-  stateName: string,
-  dispatcherName: string,
+  stateName: string | symbol,
+  dispatcherName: string | symbol,
   reducer: Reducer<any, any>,
   initialValue: Object | Mapper<any, any>,
 ): Composable;
 
-export function withReducer<TPropsIn, TPropNames extends string, TPropsValue, TAction>(
+export function withReducer<TPropsIn, TPropNames extends string | symbol, TPropsValue, TAction>(
   stateName: TPropNames,
   dispatcherName: TPropNames,
   reducer: Reducer<TPropsValue, TAction>,
   initialValue: TPropsValue | Mapper<TPropsIn, TPropsValue>,
 ): Composable;
 
-export function withReducer<TPropsIn, TPropNames extends string, TPropsValue, TAction>(
+export function withReducer<TPropsIn, TPropNames extends string | symbol, TPropsValue, TAction>(
   stateName: TPropNames,
   dispatcherName: TPropNames,
   reducer: Reducer<TPropsValue, TAction>,
@@ -40,7 +40,7 @@ export function withReducer<TPropsIn, TPropNames extends string, TPropsValue, TA
       let curState: any;
       return [
         stateCallback((initState, props) => {
-          const newState = initState(stateName, resolveValue(initialValue, props));
+          const newState = initState(String(stateName), resolveValue(initialValue, props));
           update = newState.updater;
           name = newState.name;
           dispatcher = (action: any, callback: any) => update(reducer(curState, action), callback);
