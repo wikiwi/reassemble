@@ -14,7 +14,9 @@
     "./src/**/*.ts",
     "./src/**/*.tsx",
     "./test/**/*.ts",
-    "./test/**/*.tsx"
+    "./test/**/*.tsx",
+    "./benchmark/**/*.ts",
+    "./benchmark/**/*.tsx"
   ],
   "exclude": [
     "node_modules"
