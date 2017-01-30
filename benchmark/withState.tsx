@@ -36,21 +36,16 @@ function cleanup() {
 }
 
 const create = (lib: any) => {
-  const { withProps } = lib;
+  const { withState } = lib;
   return lib.compose(
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
   );
 };
 

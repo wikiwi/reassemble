@@ -35,22 +35,30 @@ function cleanup() {
   ReactDOM.unmountComponentAtNode(container);
 }
 
+// This is a real life example that determines whether the user
+// focused on a component using the keyboard instead of the mouse or touch.
 const create = (lib: any) => {
-  const { withProps } = lib;
-  return lib.compose(
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
+  const {withState, withHandlers, compose} = lib;
+  let lastMouseDownTime = 0;
+  return compose(
+    withState("keyboardFocus", "setKeyboardFocus", false),
+    withHandlers({
+      onFocus: ({onFocus, setKeyboardFocus}: any) => (event: any) => {
+        if (onFocus) { onFocus(event); }
+        let now = new Date().getTime();
+        if (now - lastMouseDownTime > 750) {
+          setKeyboardFocus(true);
+        }
+      },
+      onBlur: ({onBlur, setKeyboardFocus}: any) => (event: any) => {
+        if (onBlur) { onBlur(event); }
+        setKeyboardFocus(false);
+      },
+      onMouseDown: ({onMouseDown}: any) => (event: any) => {
+        if (onMouseDown) { onMouseDown(event); }
+        lastMouseDownTime = new Date().getTime();
+      },
+    }),
   );
 };
 
@@ -69,6 +77,10 @@ suite
     cleanup();
   })
   .add("assemble", () => {
+    render(<Assembled />);
+    cleanup();
+  })
+  .add("react", () => {
     render(<Assembled />);
     cleanup();
   })
