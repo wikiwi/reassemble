@@ -214,7 +214,7 @@ export function assemble<TInner, TOuter>(...callbacks: ComponentCallbacks[]): Co
         super(blueprint, target, isReferentiallyTransparent, props, context);
       }
     };
-    blueprint.classCallbacks.forEach((cb) => cb(assembled, target));
+    blueprint.staticCallbacks.forEach((cb) => cb(assembled, target));
     return assembled;
   };
 }

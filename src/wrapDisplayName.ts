@@ -11,7 +11,7 @@ import getDisplayName from "./utils/getDisplayName";
 
 export function wrapDisplayName(name: string): Composable {
   return {
-    classCallback: (componentClass, target) => {
+    staticCallback: (componentClass, target) => {
       componentClass["displayName"] = `${name}(${getDisplayName(target)})`;
     },
   };

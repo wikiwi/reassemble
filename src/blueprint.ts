@@ -14,7 +14,7 @@ import resolveValue from "./utils/resolveValue";
 
 export type StateUpdater<T> = (newState: T, callback: () => void) => void;
 
-export type ClassCallback = (componentClass: ComponentClass<any>, target: ReactComponent<any> | string) => void;
+export type StaticCallback = (componentClass: ComponentClass<any>, target: ReactComponent<any> | string) => void;
 
 export type LifeCycleCallbackTypes = {
   componentWillMountCallback?: (props: any, state: any, context: any) => () => void;
@@ -65,7 +65,7 @@ export type InstanceCallbackListTypesafe =
   | InstanceCallbackEntry<"componentDidUpdateCallback">>;
 
 export type ComponentCallbacks = {
-  classCallback?: ClassCallback;
+  staticCallback?: StaticCallback;
   instanceCallbacks?: (() => InstanceCallbackList) | InstanceCallbackList;
 };
 
@@ -111,14 +111,14 @@ export const componentDidUpdateCallback: CallbackEntryHelper<"componentDidUpdate
   (callback) => ({ kind: "componentDidUpdateCallback", callback });
 
 export type Blueprint = {
-  classCallbacks?: ClassCallback[];
+  staticCallbacks?: StaticCallback[];
   instanceCallbacks?: () => InstanceCallbackListTypesafe;
 };
 
 export function createBlueprint(...composables: Composable[]): Blueprint {
   const componentCallbacks: ComponentCallbacks[] = combine(...composables) as ComponentCallbacks[];
   return {
-    classCallbacks: componentCallbacks.filter((c) => c.classCallback).map((c) => c.classCallback),
+    staticCallbacks: componentCallbacks.filter((c) => c.staticCallback).map((c) => c.staticCallback),
     instanceCallbacks: () => {
       const result: InstanceCallbackList = [];
       componentCallbacks.forEach((c) => {

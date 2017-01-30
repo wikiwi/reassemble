@@ -13,7 +13,7 @@ export function getContext<T>(
   contextTypes: T,
 ): Composable {
   return {
-    classCallback: (componentClass) => {
+    staticCallback: (componentClass) => {
       componentClass.contextTypes = {
         ...componentClass.contextTypes,
         ...(contextTypes as any),

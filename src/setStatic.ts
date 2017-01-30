@@ -10,7 +10,7 @@ import { Composable } from "./blueprint";
 
 export function setStatic<K, V>(key: K, value: V): Composable {
   return {
-    classCallback: (componentClass: any) => {
+    staticCallback: (componentClass: any) => {
       componentClass[key] = value;
     },
   };
