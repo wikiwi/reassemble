@@ -9,6 +9,7 @@
 import { Composable, propsCallback } from "./blueprint";
 import { Mapper } from "./types";
 import resolveValue from "./utils/resolveValue";
+import getKeysAndSymbols from "./utils/getKeysAndSymbols";
 
 export type EventHandler = Function;
 export type AnyHandleCreators = {
@@ -38,7 +39,7 @@ export function withHandlers<TPropsIn, TPropsOut>(
           if (!handlers) {
             handlers = {};
             const resolvedHandlers: any = resolveValue(handlerCreators, props);
-            Object.keys(resolvedHandlers).forEach(
+            getKeysAndSymbols(resolvedHandlers).forEach(
               (name) => handlers[name] = (...args: any[]) => resolvedHandlers[name](handlerProps)(...args),
             );
           }

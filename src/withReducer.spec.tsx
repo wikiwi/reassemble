@@ -11,7 +11,9 @@ import { assert } from "chai";
 import { shallow } from "enzyme";
 
 import assemble from "./assemble";
+import combine from "./combine";
 import withReducer from "./withReducer";
+import withProps from "./withProps";
 import Component from "../test/component";
 
 const counterReducer = (count: number, action: any) => {
@@ -37,5 +39,16 @@ describe("withReducer", () => {
     assert.strictEqual(wrapper.props().counter, 1);
     wrapper.props().dispatch({ type: "DECREMENT" });
     assert.strictEqual(wrapper.props().counter, 0);
+  });
+
+  it("should work with Symbol", () => {
+    const sym = Symbol();
+    const composable = combine(
+      withReducer(sym, "dispatch", counterReducer, 5),
+      withProps((props) => ({ counter: props[sym] })),
+    );
+    const Assembly = assemble(composable)(Component);
+    const wrapper = shallow(<Assembly />);
+    assert.strictEqual(wrapper.props().counter, 5);
   });
 });

@@ -66,4 +66,15 @@ describe("withState", () => {
       assert.strictEqual(wrapper.props().counter3, 15);
     });
   });
+
+  it("should work with Symbol", () => {
+    const sym = Symbol();
+    const composable = combine(
+      withState(sym, "setCounter", 5),
+      withProps((props) => ({ counter1: props[sym] })),
+    );
+    const Assembly = assemble(composable)(Component);
+    const wrapper = shallow(<Assembly />);
+    assert.strictEqual(wrapper.props().counter1, 5);
+  });
 });

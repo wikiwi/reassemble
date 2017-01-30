@@ -9,7 +9,7 @@
 import { Composable, propsCallback } from "./blueprint";
 import pick from "./utils/pick";
 
-export function integrate<T extends string>(...propNames: T[]): Composable {
+export function integrate<T extends string | symbol>(...propNames: T[]): Composable {
   return {
     instanceCallbacks: [
       propsCallback((props) => {
