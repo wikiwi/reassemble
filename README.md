@@ -93,18 +93,18 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [renderComponent][docs renderComponent]               | TODO    ||
 | [renderNothing][docs renderNothing]                   | TODO    ||
 | [setDisplayName][docs setDisplayName]                 | ✅       ||
-| [setPropTypes][docs setPropTypes]                     | TODO    ||
+| [setPropTypes][docs setPropTypes]                     | ✅       ||
 | [setStatic][docs setStatic]                           | ✅       ||
 | [shouldUpdate][docs shouldUpdate]                     | ✅       ||
 | [pure][docs pure]                                     | TODO    ||
-| [withContext][docs withContext]                       | TODO    ||
+| [withContext][docs withContext]                       | ✅       | Context will not be available in other _Composables_ of the same Component |
 | [withHandlers][docs withHandlers]                     | ✅       ||
 | [withProps][docs withProps]                           | ✅       ||
 | [withPropsOnChange][docs withPropsOnChange]           | ✅       ||
 | [withReducer][docs withReducer]                       | ✅       ||
 | [withState][docs withState]                           | ✅       ||
 | [wrapDisplayName][docs wrapDisplayName]               | ✅       ||
-| [toClass][docs toClass]                               | TODO    ||
+| [toClass][docs toClass]                               | ✅       ||
 
 ## Composables introduced by reassemble
 
