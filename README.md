@@ -97,8 +97,8 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 
  * [`debug()`](#debug)
  * [`noOp`](#noop)
- * [`isolate`](#isolate)
- * [`integrate`](#integrate)
+ * [`isolate()`](#isolate)
+ * [`integrate()`](#integrate)
  * [`onWillMount()`](#onwillmount)
  * [`onDidMount()`](#ondidmount)
  * [`onWillUnmount()`](#onwillunmount)
@@ -120,14 +120,14 @@ Passed current props to callback. Defaults to logging to the console.
 noOp: Composable
 ```
 
-### `isolate`
+### `isolate()`
 
 ```ts
 isolate(composables: Composable[]): Composable
 ```
 
 Runs passed composables in isolation: any props created will be reverted.
-Use with [`integrate`](#integrate) to selectively keep props.
+Use with [`integrate()`](#integrate) to selectively keep props.
 
 ```ts
 isolate(
@@ -140,13 +140,13 @@ isolate(
 // { b: 3 }
 ```
 
-### `integrate`
+### `integrate()`
 
 ```ts
 integrate(...keys: string[]): Composable
 ```
 
-Selectively keep props that are otherwise reverted in [`isolate`](#isolate).
+Selectively keep props that are otherwise reverted in [`isolate()`](#isolate).
 
 ### `onWillMount()`
 
