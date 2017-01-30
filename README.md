@@ -110,7 +110,7 @@ _reassemble_ is written in typescript and as such comes with its own definitions
 ### `debug()`
 
 ```ts
-debug(callback: (props: T) => void): Composable
+debug(callback: (props) => void): Composable
 ```
 
 Passed current props to callback. Defaults to logging to the console.
