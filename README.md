@@ -82,7 +82,7 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [defaultProps][docs defaultProps]                     | ✅       ||
 | [flattenProps][docs flattenProps]                     | ✅       ||
 | [getContext][docs getContext]                         | ✅       ||
-| [lifecycle][docs lifecycle]                           | TODO    | Instance access via `this` is not supported |
+| [lifecycle][docs lifecycle]                           | ❌       | Use [Lifecycle Composables](#lifecycle)  |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | Needs further investigation |
 | [omitProps][docs omitProps]                           | ✅       ||
@@ -170,7 +170,9 @@ integrate(...keys: string[]): Composable
 
 Selectively keep props that are otherwise reverted in [`isolate()`](#isolate).
 
-### `onWillMount()`
+### Lifecycle
+
+#### `onWillMount()`
 
 ```ts
 onWillMount(props): Composable
@@ -178,7 +180,7 @@ onWillMount(props): Composable
 
 Called during lifecycle `componentWillMount()`
 
-### `onDidMount()`
+#### `onDidMount()`
 
 ```ts
 onDidMount(props): Composable
@@ -186,7 +188,7 @@ onDidMount(props): Composable
 
 Called during lifecycle `componentDidMount()`
 
-### `onWillUnmount()`
+#### `onWillUnmount()`
 
 ```ts
 onWillUnmount(props): Composable
@@ -194,7 +196,7 @@ onWillUnmount(props): Composable
 
 Called during lifecycle `componentWillUnmount()`
 
-### `onWillReceiveProps()`
+#### `onWillReceiveProps()`
 
 ```ts
 onWillReceiveProps(prevProps, nextProps): Composable
@@ -202,7 +204,7 @@ onWillReceiveProps(prevProps, nextProps): Composable
 
 Called during lifecycle `componentWillReceiveProps()` and when state changes because some props are derived from state.
 
-### `onWillUpdate()`
+#### `onWillUpdate()`
 
 ```ts
 onWillUpdate(prevProps, nextProps): Composable
@@ -210,7 +212,7 @@ onWillUpdate(prevProps, nextProps): Composable
 
 Called during lifecycle `componentWillUpdate()`
 
-### `onDidUpdate()`
+#### `onDidUpdate()`
 
 ```ts
 onDidUpdate(prevProps, nextProps): Composable
