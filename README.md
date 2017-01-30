@@ -85,7 +85,6 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [lifecycle][docs lifecycle]                           | ❌       | Use [Lifecycle Composables](#lifecycle)  |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | File an issue if you really need this |
-| [omitProps][docs omitProps]                           | ✅       ||
 | [onlyUpdateForKeys][docs onlyUpdateForKeys]           | ✅       ||
 | [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | ❌       | Use [onlyUpdateForKeys][docs onlyUpdateForKeys] instead |
 | [renameProp][docs renameProp]                         | ✅       ||
