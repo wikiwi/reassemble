@@ -3,14 +3,17 @@ import { assert } from "chai";
 import { spy } from "sinon";
 import { mount } from "enzyme";
 
-import {
-  onWillMount, onDidMount, onWillUnmount,
-  onWillReceiveProps, onWillUpdate, onDidUpdate, shouldUpdate,
-} from "./lifecycle";
 import assemble from "./assemble";
 import combine from "./combine";
 import withProps from "./withProps";
 import withState from "./withState";
+import onWillMount from "./onWillMount";
+import onDidMount from "./onDidMount";
+import onWillUnmount from "./onWillUnmount";
+import onWillReceiveProps from "./onWillReceiveProps";
+import onWillUpdate from "./onWillUpdate";
+import onDidUpdate from "./onDidUpdate";
+import shouldUpdate from "./shouldUpdate";
 import Component from "../test/component";
 
 describe("lifecycle", () => {

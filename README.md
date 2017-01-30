@@ -86,8 +86,8 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | File an issue if you really need this |
 | [omitProps][docs omitProps]                           | ✅       ||
-| [onlyUpdateForKeys][docs onlyUpdateForKeys]           | TODO    ||
-| [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | TODO    ||
+| [onlyUpdateForKeys][docs onlyUpdateForKeys]           | ✅       ||
+| [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | ❌       | Use [onlyUpdateForKeys][docs onlyUpdateForKeys] instead |
 | [renameProp][docs renameProp]                         | ✅       ||
 | [renameProps][docs renameProps]                       | ✅       ||
 | [renderComponent][docs renderComponent]               | TODO    ||
@@ -96,7 +96,7 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [setPropTypes][docs setPropTypes]                     | ✅       ||
 | [setStatic][docs setStatic]                           | ✅       ||
 | [shouldUpdate][docs shouldUpdate]                     | ✅       ||
-| [pure][docs pure]                                     | TODO    ||
+| [pure][docs pure]                                     | ✅       ||
 | [withContext][docs withContext]                       | ✅       | Context will not be available in other _Composables_ of the same Component |
 | [withHandlers][docs withHandlers]                     | ✅       ||
 | [withProps][docs withProps]                           | ✅       ||
