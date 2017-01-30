@@ -82,7 +82,7 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [defaultProps][docs defaultProps]                     | ✅       ||
 | [flattenProps][docs flattenProps]                     | ✅       ||
 | [getContext][docs getContext]                         | ✅       ||
-| [lifecycle][docs lifecycle]                           | ❌       | Use [LifeCycle Composables](#lifecycle)  |
+| [lifecycle][docs lifecycle]                           | ❌       | Use [Lifecycle Composables](#lifecycle)  |
 | [mapProps][docs mapProps]                             | ✅       ||
 | [mapPropsStream][docs mapPropsStream]                 | ❌       | Needs further investigation |
 | [omitProps][docs omitProps]                           | ✅       ||
