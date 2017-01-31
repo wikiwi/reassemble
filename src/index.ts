@@ -34,3 +34,5 @@ export * from "./shouldUpdate";
 export * from "./toClass";
 export * from "./pure";
 export * from "./onlyUpdateForKeys";
+export * from "./renderComponent";
+export * from "./renderNull";

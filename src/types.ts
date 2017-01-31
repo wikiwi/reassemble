@@ -1,6 +1,7 @@
 import { ComponentClass, StatelessComponent } from "react";
 
 export type ReactComponent<T> = ComponentClass<T> | StatelessComponent<T>;
+export type ReactAnyComponent = ReactComponent<any> | string;
 export type ComponentEnhancer<TInner, TOutter> =
   (component: ReactComponent<TInner>) => ComponentClass<TOutter>;
 export type Mapper<TIn, TOut> = (input: TIn) => TOut;

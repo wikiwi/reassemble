@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ComponentClass, Component } from "react";
 
-import { ReactComponent, ComponentEnhancer } from "./types";
+import { ReactComponent, ReactAnyComponent, ComponentEnhancer } from "./types";
 import {
   createBlueprint, InstanceCallbackListTypesafe, StateUpdater, LifeCycleCallbackTypes,
   Blueprint, InstanceCallbackEntry, ComponentCallbacks,
@@ -14,6 +14,7 @@ type ComponentData = {
   props: any,
   state: any,
   context: any,
+  component: ReactAnyComponent,
   childContext?: any,
   lifeCycleCallbacks?: {[P in keyof LifeCycleCallbackTypes]: Function[]} & { [name: string]: Function[] },
 };
@@ -47,7 +48,7 @@ class AssemblyBase<T> extends Component<T, any> {
     this.target = target;
     this.callbackList = blueprint.instanceCallbacks();
     this.hasWillReceivePropsCallback = this.callbackList.some(hasWillReceivePropsCallback);
-    this.computed = this.runInstanceCallbacks({ props, state: {}, context });
+    this.computed = this.runInstanceCallbacks({ props, state: {}, context, component: this.target });
     this.state = this.computed.state;
     this.revision = 0;
   }
@@ -59,14 +60,24 @@ class AssemblyBase<T> extends Component<T, any> {
   public componentWillUpdate() { return this.runLifeCycleCallbacks("componentWillUpdateCallback"); }
   public componentDidUpdate() { return this.runLifeCycleCallbacks("componentDidUpdateCallback"); }
   public componentWillReceiveProps(nextProps: any, nextContext: any) {
-    this.rerunInstanceCallbacks({ props: nextProps, state: this.computed.state, context: nextContext });
+    this.rerunInstanceCallbacks({
+      props: nextProps,
+      state: this.computed.state,
+      context: nextContext,
+      component: this.target,
+    });
     this.runLifeCycleCallbacks("componentWillReceivePropsCallback");
   }
 
   public shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {
     if (!this.hasWillReceivePropsCallback) {
       // State based props was not computed before, do it now.
-      this.rerunInstanceCallbacks({ props: nextProps, state: nextState, context: nextContext });
+      this.rerunInstanceCallbacks({
+        props: nextProps,
+        state: nextState,
+        context: nextContext,
+        component: this.target,
+      });
     }
     const callbacks = this.computed.lifeCycleCallbacks.shouldComponentUpdateCallback;
     if (callbacks) {
@@ -80,10 +91,17 @@ class AssemblyBase<T> extends Component<T, any> {
   }
 
   public render() {
-    if (this.isReferentiallyTransparent) {
-      return (this.target as any)(this.computed.props);
+    const {component: Component, props} = this.computed;
+    if (!Component) {
+      return null;
     }
-    return <this.target {...this.computed.props} />;
+    if (
+      Component === this.target && this.isReferentiallyTransparent ||
+      isReferentiallyTransparentFunctionComponent(Component)
+    ) {
+      return (Component as any)(props);
+    }
+    return <Component {...props} />;
   }
 
   private runLifeCycleCallbacks(name: keyof LifeCycleCallbackTypes) {
@@ -135,7 +153,12 @@ class AssemblyBase<T> extends Component<T, any> {
               interim.state = { ...interim.state, [unique]: value };
               const updater: StateUpdater<any> = (val, callback) => {
                 if (this.hasWillReceivePropsCallback && sc.revision !== this.revision) {
-                  sc.init = { props: this.props, state: this.computed.state, context: this.context };
+                  sc.init = {
+                    props: this.props,
+                    state: this.computed.state,
+                    context: this.context,
+                    component: this.target,
+                  };
                   sc.startAt = 0;
                 }
                 this.setStateWithLifeCycle({ [unique]: val }, callback, sc.init, sc.startAt);
@@ -150,6 +173,9 @@ class AssemblyBase<T> extends Component<T, any> {
           break;
         case "skipCallback":
           idx += entry.callback(interim.props, interim.state, interim.context);
+          break;
+        case "renderCallback":
+          interim.component = entry.callback(interim.component, interim.props, interim.state, interim.context);
           break;
         case "lazyLoadCallback":
           const list = entry.callback(interim.props, interim.state, interim.context);

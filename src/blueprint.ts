@@ -1,6 +1,6 @@
 import { ComponentClass } from "react";
 
-import { ReactComponent } from "./types";
+import { ReactComponent, ReactAnyComponent } from "./types";
 import combine from "./combine";
 import resolveValue from "./utils/resolveValue";
 
@@ -27,6 +27,7 @@ export type InstanceCallbackTypes = LifeCycleCallbackTypes & {
     props: any, state: any, context: any,
   ) => void;
   skipCallback?: (props: any, state: any, context: any) => number;
+  renderCallback?: (component: ReactAnyComponent, props: any, state: any, context: any) => ReactAnyComponent;
 };
 
 export type InstanceCallbackEntry<T extends keyof InstanceCallbackTypes> = {
@@ -48,6 +49,7 @@ export type InstanceCallbackListTypesafe =
   | InstanceCallbackEntry<"stateCallback">
   | InstanceCallbackEntry<"childContextCallback">
   | InstanceCallbackEntry<"skipCallback">
+  | InstanceCallbackEntry<"renderCallback">
   | InstanceCallbackEntry<"componentWillMountCallback">
   | InstanceCallbackEntry<"componentDidMountCallback">
   | InstanceCallbackEntry<"componentWillUnmountCallback">
@@ -80,6 +82,9 @@ export const childContextCallback: CallbackEntryHelper<"childContextCallback"> =
 
 export const skipCallback: CallbackEntryHelper<"skipCallback"> =
   (callback) => ({ kind: "skipCallback", callback });
+
+export const renderCallback: CallbackEntryHelper<"renderCallback"> =
+  (callback) => ({ kind: "renderCallback", callback });
 
 export const componentWillMountCallback: CallbackEntryHelper<"componentWillMountCallback"> =
   (callback) => ({ kind: "componentWillMountCallback", callback });

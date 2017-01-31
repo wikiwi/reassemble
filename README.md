@@ -89,8 +89,8 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [onlyUpdateForPropTypes][docs onlyUpdateForPropTypes] | ❌       | Use [onlyUpdateForKeys][docs onlyUpdateForKeys] instead |
 | [renameProp][docs renameProp]                         | ✅       ||
 | [renameProps][docs renameProps]                       | ✅       ||
-| [renderComponent][docs renderComponent]               | TODO    ||
-| [renderNothing][docs renderNothing]                   | TODO    ||
+| [renderComponent][docs renderComponent]               | ✅       ||
+| [renderNothing][docs renderNothing]                   | ✅       ||
 | [setDisplayName][docs setDisplayName]                 | ✅       ||
 | [setPropTypes][docs setPropTypes]                     | ✅       ||
 | [setStatic][docs setStatic]                           | ✅       ||
