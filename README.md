@@ -142,7 +142,7 @@ Omit selected props.
 ### `isolate()`
 
 ```ts
-isolate(composables: Composable[]): Composable
+isolate(...composables: Composable[]): Composable
 ```
 
 Runs passed _Composables_ in isolation: any props created will be reverted.
