@@ -2,8 +2,6 @@
 
 _reassemble_ is a library for the composition of React Higher-Order-Components optimized for performance.
 
-_word of caution: this is still under heavy development_
-
 [![NPM Version Widget]][npm version]
 [![Build Status Widget]][build status]
 [![Coverage Widget]][coverage]
