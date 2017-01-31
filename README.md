@@ -219,6 +219,15 @@ onDidUpdate(prevProps, nextProps): Composable
 
 Called during lifecycle `componentDidUpdate()`
 
+## Roadmap
+
+- More performance optimizations
+- More tests
+
+## License
+
+MIT
+
 [docs branch]: https://github.com/acdlite/recompose/blob/master/docs/API.md#branch
 [docs defaultProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#defaultprops
 [docs flattenProps]: https://github.com/acdlite/recompose/blob/master/docs/API.md#flattenprops
