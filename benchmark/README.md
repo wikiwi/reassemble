@@ -16,9 +16,9 @@ Composing 10x `withHandlers()`
 [Source](./withHandlers.tsx)
 
 ```bash
-recompose x 762 ops/sec ±2.38% (76 runs sampled)
-recompact x 2,135 ops/sec ±2.87% (76 runs sampled)
-reassemble x 2,689 ops/sec ±3.10% (71 runs sampled)
+recompose x 3,264 ops/sec ±2.63% (77 runs sampled)
+recompact x 4,855 ops/sec ±2.08% (75 runs sampled)
+reassemble x 5,159 ops/sec ±2.89% (70 runs sampled)
 Fastest is reassemble
 ```
 
@@ -29,10 +29,10 @@ Composing 10x `withState()`
 [Source](./withState.tsx)
 
 ```bash
-recompose x 767 ops/sec ±4.22% (75 runs sampled)
-recompact x 2,083 ops/sec ±3.35% (76 runs sampled)
-reassemble x 2,525 ops/sec ±2.54% (77 runs sampled)
-Fastest is reassemble
+recompose x 3,238 ops/sec ±2.08% (79 runs sampled)
+recompact x 5,186 ops/sec ±1.75% (77 runs sampled)
+reassemble x 5,101 ops/sec ±3.16% (74 runs sampled)
+Fastest is recompact,reassemble
 ```
 
 ### withProps()
@@ -42,9 +42,9 @@ Composing 10x `withProps()`
 [Source](./withProps.tsx)
 
 ```bash
-recompose x 3,487 ops/sec ±4.27% (76 runs sampled)
-recompact x 2,278 ops/sec ±1.68% (80 runs sampled)
-reassemble x 3,111 ops/sec ±1.54% (81 runs sampled)
+recompose x 9,488 ops/sec ±1.80% (78 runs sampled)
+recompact x 5,346 ops/sec ±1.38% (77 runs sampled)
+reassemble x 7,799 ops/sec ±1.60% (77 runs sampled)
 Fastest is recompose
 ```
 
@@ -53,8 +53,8 @@ Fastest is recompose
 [Source](./withKeyboardFocus.tsx)
 
 ```bash
-recompose x 2,485 ops/sec ±6.41% (77 runs sampled)
-recompact x 2,370 ops/sec ±2.29% (77 runs sampled)
-reassemble x 2,733 ops/sec ±3.80% (74 runs sampled)
-Fastest is reassemble
+recompose x 7,063 ops/sec ±3.70% (76 runs sampled)
+recompact x 5,773 ops/sec ±1.93% (74 runs sampled)
+reassemble x 6,412 ops/sec ±2.50% (75 runs sampled)
+Fastest is recompose
 ```

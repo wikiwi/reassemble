@@ -21,7 +21,7 @@
   "typings": "./lib/index.d.ts",
   "scripts": {
     "all": "npm run lint && npm run test:coverage && npm run build",
-    "bench": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node",
+    "bench": "cross-env NODE_ENV=production TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node",
     "build": "gulp && webpack && cross-env BUILD_MINIFIED=true webpack",
     "clean": "rm -r -f dist lib cjs coverage",
     "ci:coveralls": "cat coverage/lcov.info | coveralls",
