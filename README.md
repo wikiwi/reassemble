@@ -100,7 +100,6 @@ _reassemble_ is written in _TypeScript_ and as such comes with its own definitio
 | [withPropsOnChange][docs withPropsOnChange]           | ✅       ||
 | [withReducer][docs withReducer]                       | ✅       ||
 | [withState][docs withState]                           | ✅       ||
-| [wrapDisplayName][docs wrapDisplayName]               | ✅       ||
 | [toClass][docs toClass]                               | ✅       ||
 
 ## Composables introduced by reassemble
@@ -251,7 +250,6 @@ MIT
 [docs withPropsOnChange]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withpropsonchange
 [docs withReducer]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withreducer
 [docs withState]: https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate
-[docs wrapDisplayName]: https://github.com/acdlite/recompose/blob/master/docs/API.md#wrapdisplayname
 [docs toClass]: https://github.com/acdlite/recompose/blob/master/docs/API.md#toclass
 
 [npm version]: https://www.npmjs.com/package/reassemble
