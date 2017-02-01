@@ -1,3 +1,7 @@
+## 0.5.1 (February 01, 2017)
+
+- Correctly export renderNothing
+
 ## 0.5.0 (Januar 31, 2017)
 
 - Added support for ES6 Symbols
