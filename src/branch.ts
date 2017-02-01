@@ -11,6 +11,18 @@ const resolveCallbacks = (list: ComponentCallbacks[]) => list.reduce<InstanceCal
     return result;
   }, []);
 
+export function branch(
+  test: Predicate<any>,
+  left: Composable,
+  right?: Composable,
+): Composable;
+
+export function branch<T>(
+  test: Predicate<T>,
+  left: Composable,
+  right?: Composable,
+): Composable;
+
 export function branch<T>(
   test: Predicate<T>,
   left: Composable,

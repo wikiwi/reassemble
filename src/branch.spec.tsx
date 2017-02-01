@@ -13,7 +13,7 @@ describe("branch", () => {
   it("should branch left", () => {
     const composables: Composable[] = [
       withProps({ test: true }),
-      branch<any>(
+      branch(
         (props) => props.test,
         [withProps({ left: true })],
         [withProps({ right: true })],
@@ -27,7 +27,7 @@ describe("branch", () => {
   it("should branch right", () => {
     const composables: Composable[] = [
       withProps({ test: false }),
-      branch<any>(
+      branch(
         (props) => props.test,
         withProps({ left: true }),
         withProps({ right: true }),
@@ -40,11 +40,11 @@ describe("branch", () => {
 
   it("should nest", () => {
     const composables: Composable[] = [
-      branch<any>(
+      branch(
         () => true,
         combine(
           withProps({ left: true }),
-          branch<any>(
+          branch(
             () => false,
             withProps({ deepleft: true }),
             withProps({ deepRight: true }),
