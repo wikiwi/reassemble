@@ -86,5 +86,8 @@
     "tslint": "^4.1.1",
     "typescript": "^2.1.5",
     "webpack": "^2.2.0-rc.1"
+  },
+  "dependencies": {
+    "fbjs": "^0.8.9"
   }
 }
