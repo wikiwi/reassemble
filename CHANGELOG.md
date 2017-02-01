@@ -1,3 +1,7 @@
+## 0.5.3 (February 01, 2017)
+
+- Add forgotten dependency `fbjs`
+
 ## 0.5.2 (February 01, 2017)
 
 - Better typings for `branch()`
