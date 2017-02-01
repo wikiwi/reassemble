@@ -48,6 +48,19 @@ reassemble x 7,799 ops/sec ±1.60% (77 runs sampled)
 Fastest is recompose
 ```
 
+### withPropsOnChange()
+
+Composing 10x `withPropsOnChange()`
+
+[Source](./withPropsOnChange.tsx)
+
+```bash
+recompose x 3,393 ops/sec ±3.54% (76 runs sampled)
+recompact x 5,257 ops/sec ±1.48% (78 runs sampled)
+reassemble x 7,081 ops/sec ±1.33% (79 runs sampled)
+Fastest is reassemble
+```
+
 ### Use Case #1: withKeyboardFocus()
 
 [Source](./withKeyboardFocus.tsx)
