@@ -16,7 +16,7 @@ Both projects are not mutual exclusive but _reassemble_ can be used perfectly to
 
 ## Performance
 
-In general the performance of _recompose_ drops quickly as soon as multiple HOCs are needed that cannot be squashed together, whereas _reassemble_'s performance never suffers a sharp drop.
+At the moment _recompose_ is a bit faster in simple compositions (though we plan to close this gap) and _reassemble_ performs  better in complex composition.
 
 [Check out current benchmarks](./benchmark)
 
