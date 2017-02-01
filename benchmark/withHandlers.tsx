@@ -38,6 +38,8 @@ const create = (lib: any) => {
     withHandlers({ onClick: () => () => "foo" }),
     withHandlers({ onClick: () => () => "foo" }),
     withHandlers({ onClick: () => () => "foo" }),
+    withHandlers({ onClick: () => () => "foo" }),
+    withHandlers({ onClick: () => () => "foo" }),
   );
 };
 
@@ -55,7 +57,7 @@ suite
     render(<Compacted />);
     cleanup();
   })
-  .add("assemble", () => {
+  .add("reassemble", () => {
     render(<Assembled />);
     cleanup();
   })

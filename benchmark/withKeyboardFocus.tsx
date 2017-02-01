@@ -68,11 +68,7 @@ suite
     render(<Compacted />);
     cleanup();
   })
-  .add("assemble", () => {
-    render(<Assembled />);
-    cleanup();
-  })
-  .add("react", () => {
+  .add("reassemble", () => {
     render(<Assembled />);
     cleanup();
   })

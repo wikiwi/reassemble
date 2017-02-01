@@ -38,6 +38,8 @@ const create = (lib: any) => {
     withState("foo", "setFoo", "bar"),
     withState("foo", "setFoo", "bar"),
     withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
+    withState("foo", "setFoo", "bar"),
   );
 };
 
@@ -55,7 +57,7 @@ suite
     render(<Compacted />);
     cleanup();
   })
-  .add("assemble", () => {
+  .add("reassemble", () => {
     render(<Assembled />);
     cleanup();
   })

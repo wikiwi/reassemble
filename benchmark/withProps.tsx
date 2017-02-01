@@ -40,9 +40,6 @@ const create = (lib: any) => {
     withProps({ a: 1 }),
     withProps({ a: 1 }),
     withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
   );
 };
 
@@ -60,7 +57,7 @@ suite
     render(<Compacted />);
     cleanup();
   })
-  .add("assemble", () => {
+  .add("reassemble", () => {
     render(<Assembled />);
     cleanup();
   })
