@@ -11,6 +11,6 @@ describe("renderNothing", () => {
     const composable = renderNothing;
     const Assembly = assemble(composable)(Component);
     const wrapper = shallow(<Assembly />);
-    assert.strictEqual(wrapper.children().length, 0);
+    assert.isNull(wrapper.type());
   });
 });
