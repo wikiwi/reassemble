@@ -1,3 +1,7 @@
+## 0.5.2 (February 01, 2017)
+
+- Better typings for `branch()`
+
 ## 0.5.1 (February 01, 2017)
 
 - Correctly export renderNothing
