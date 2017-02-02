@@ -1,3 +1,7 @@
+## 0.5.4 (February 01, 2017)
+
+- Fix bug in branch which was skipping 1 extra callback.
+
 ## 0.5.3 (February 01, 2017)
 
 - Add forgotten dependency `fbjs`
