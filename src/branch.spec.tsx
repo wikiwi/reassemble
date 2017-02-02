@@ -15,13 +15,14 @@ describe("branch", () => {
       withProps({ test: true }),
       branch(
         (props) => props.test,
-        [withProps({ left: true })],
-        [withProps({ right: true })],
+        withProps({ left: true }),
+        withProps({ right: true }),
       ),
+      withProps({ next: true }),
     ];
     const Assembly = assemble(...composables)(Component);
     const wrapper = shallow(<Assembly />);
-    assert.deepEqual(wrapper.props(), { left: true, test: true });
+    assert.deepEqual(wrapper.props(), { left: true, test: true, next: true });
   });
 
   it("should branch right", () => {
@@ -32,10 +33,43 @@ describe("branch", () => {
         withProps({ left: true }),
         withProps({ right: true }),
       ),
+      withProps({ next: true }),
     ];
     const Assembly = assemble(...composables)(Component);
     const wrapper = shallow(<Assembly />);
-    assert.deepEqual(wrapper.props(), { right: true, test: false });
+    assert.deepEqual(wrapper.props(), { right: true, test: false, next: true });
+  });
+
+  it("should branch first left then right", () => {
+    const composables: Composable[] = [
+      branch(
+        (props) => props.test,
+        withProps({ left: true }),
+        withProps({ right: true }),
+      ),
+      withProps({ next: true }),
+    ];
+    const Assembly = assemble(...composables)(Component);
+    const wrapper = shallow(<Assembly />);
+    assert.deepEqual(wrapper.props(), { right: true, next: true });
+    wrapper.setProps({ test: true });
+    assert.deepEqual(wrapper.props(), { left: true, test: true, next: true });
+  });
+
+  it("should branch first right then left", () => {
+    const composables: Composable[] = [
+      branch(
+        (props) => !props.test,
+        withProps({ left: true }),
+        withProps({ right: true }),
+      ),
+      withProps({ next: true }),
+    ];
+    const Assembly = assemble(...composables)(Component);
+    const wrapper = shallow(<Assembly />);
+    assert.deepEqual(wrapper.props(), { left: true, next: true });
+    wrapper.setProps({ test: true });
+    assert.deepEqual(wrapper.props(), { right: true, test: true, next: true });
   });
 
   it("should nest", () => {
