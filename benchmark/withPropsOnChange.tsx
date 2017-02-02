@@ -30,16 +30,7 @@ function cleanup() {
 const create = (lib: any) => {
   const { withPropsOnChange } = lib;
   return lib.compose(
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
-    withPropsOnChange(["foo"], () => ({ foo: "bar" })),
+    ...Array(100).fill(withPropsOnChange(["foo"], () => ({ foo: "bar" }))),
   );
 };
 

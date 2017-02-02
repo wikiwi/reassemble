@@ -40,7 +40,7 @@ export function branch<T>(
           if (!loaded.left && isTrue) {
             loaded.left = true;
             const newCallbacks = resolveCallbacks(leftList);
-            const skip = newCallbacks.length + (loaded.right ? 1 : 0);
+            const skip = newCallbacks.length;
             newCallbacks.unshift(
               skipCallback(() => isTrue ? 0 : skip),
             );
@@ -49,7 +49,7 @@ export function branch<T>(
           if (!loaded.right && !isTrue) {
             loaded.right = true;
             const newCallbacks = resolveCallbacks(rightList);
-            const skip = newCallbacks.length + (loaded.left ? 1 : 0);
+            const skip = newCallbacks.length;
             newCallbacks.unshift(
               skipCallback(() => isTrue ? skip : 0),
             );
