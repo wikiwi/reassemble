@@ -30,16 +30,7 @@ function cleanup() {
 const create = (lib: any) => {
   const { withProps } = lib;
   return lib.compose(
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
-    withProps({ a: 1 }),
+    ...Array(10).fill(withProps({ a: 1 })),
   );
 };
 

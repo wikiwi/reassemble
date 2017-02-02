@@ -30,16 +30,7 @@ function cleanup() {
 const create = (lib: any) => {
   const { withHandlers } = lib;
   return lib.compose(
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
-    withHandlers({ onClick: () => () => "foo" }),
+    ...Array(10).fill(withHandlers({ onClick: () => () => "foo" })),
   );
 };
 

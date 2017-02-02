@@ -30,16 +30,7 @@ function cleanup() {
 const create = (lib: any) => {
   const { withState } = lib;
   return lib.compose(
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
-    withState("foo", "setFoo", "bar"),
+    ...Array(10).fill(withState("foo", "setFoo", "bar")),
   );
 };
 
