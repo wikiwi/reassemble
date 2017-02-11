@@ -23,7 +23,6 @@ type StateCallbackEntry = InstanceCallbackEntry<"stateCallback"> & {
   init?: ComponentData;
   called?: boolean;
   startAt?: number;
-  revision: number;
 };
 
 const hasWillReceivePropsCallback = (e: InstanceCallbackEntry<any>) => e.kind === "componentWillReceivePropsCallback";
@@ -34,7 +33,8 @@ class AssemblyBase<T> extends Component<T, any> {
   private callbackList: InstanceCallbackListTypesafe;
   private hasWillReceivePropsCallback: boolean;
   private computed: ComponentData;
-  private revision: number;
+  private newestProps: any;
+  private newestContext: any;
 
   constructor(
     blueprint: Blueprint,
@@ -44,13 +44,14 @@ class AssemblyBase<T> extends Component<T, any> {
     context: any,
   ) {
     super(props, context);
+    this.newestProps = props;
+    this.newestContext = context;
     this.isReferentiallyTransparent = isReferentiallyTransparent;
     this.target = target;
     this.callbackList = blueprint.instanceCallbacks();
     this.hasWillReceivePropsCallback = this.callbackList.some(hasWillReceivePropsCallback);
     this.computed = this.runInstanceCallbacks({ props, state: {}, context, component: this.target });
     this.state = this.computed.state;
-    this.revision = 0;
   }
 
   public getChildContext() { return this.computed.childContext; }
@@ -60,6 +61,8 @@ class AssemblyBase<T> extends Component<T, any> {
   public componentWillUpdate() { return this.runLifeCycleCallbacks("componentWillUpdateCallback"); }
   public componentDidUpdate() { return this.runLifeCycleCallbacks("componentDidUpdateCallback"); }
   public componentWillReceiveProps(nextProps: any, nextContext: any) {
+    this.newestProps = nextProps;
+    this.newestContext = nextContext;
     this.rerunInstanceCallbacks({
       props: nextProps,
       state: this.computed.state,
@@ -113,6 +116,15 @@ class AssemblyBase<T> extends Component<T, any> {
     if (this.hasWillReceivePropsCallback) {
       // State needs to be considered for componentWillReceiveProps, so
       // we process props on every state change.
+      if (!init) {
+        init = {
+          props: this.newestProps,
+          state: this.computed.state,
+          context: this.newestContext,
+          component: this.target,
+        };
+        startAt = 0;
+      }
       this.rerunInstanceCallbacks({ ...init, state: { ...this.computed.state, ...stateDiff } }, startAt);
       this.runLifeCycleCallbacks("componentWillReceivePropsCallback");
     }
@@ -144,7 +156,6 @@ class AssemblyBase<T> extends Component<T, any> {
           if (this.hasWillReceivePropsCallback) {
             sc.init = { ...interim };
             sc.startAt = idx;
-            sc.revision = this.revision;
           }
           if (!sc.called) {
             sc.called = true;
@@ -152,15 +163,6 @@ class AssemblyBase<T> extends Component<T, any> {
               let unique = getUniqueKey(name, interim.state);
               interim.state = { ...interim.state, [unique]: value };
               const updater: StateUpdater<any> = (val, callback) => {
-                if (this.hasWillReceivePropsCallback && sc.revision !== this.revision) {
-                  sc.init = {
-                    props: this.props,
-                    state: this.computed.state,
-                    context: this.context,
-                    component: this.target,
-                  };
-                  sc.startAt = 0;
-                }
                 this.setStateWithLifeCycle({ [unique]: val }, callback, sc.init, sc.startAt);
               };
               return { name: unique, updater };
@@ -184,7 +186,6 @@ class AssemblyBase<T> extends Component<T, any> {
             if (!this.hasWillReceivePropsCallback) {
               this.hasWillReceivePropsCallback = list.some(hasWillReceivePropsCallback);
             }
-            this.revision++;
           }
           break;
         case "componentWillReceivePropsCallback":

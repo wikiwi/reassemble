@@ -2,6 +2,8 @@ import { Composable, stateCallback, propsCallback } from "./blueprint";
 import { Mapper } from "./types";
 import resolveValue from "./utils/resolveValue";
 
+// TODO: typings without TPropsIn.
+
 export function withState(
   stateName: string | symbol,
   updaterName: string | symbol,
