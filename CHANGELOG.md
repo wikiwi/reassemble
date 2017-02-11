@@ -1,3 +1,7 @@
+## 0.5.5 (February 11, 2017)
+
+- Fix state change after lazy loading issue
+
 ## 0.5.4 (February 01, 2017)
 
 - Fix bug in branch which was skipping 1 extra callback.
