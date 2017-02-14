@@ -1,12 +1,13 @@
 import * as React from "react";
 import { assert } from "chai";
 import { spy } from "sinon";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import assemble from "./assemble";
 import combine from "./combine";
 import withProps from "./withProps";
 import withState from "./withState";
+import omitProps from "./omitProps";
 import onWillMount from "./onWillMount";
 import onDidMount from "./onDidMount";
 import onWillUnmount from "./onWillUnmount";
@@ -171,6 +172,54 @@ describe("lifecycle", () => {
         { value: 3, foo: 0, bar: 1, setFoo, setBar },
         { value: 3, foo: 1, bar: 1, setFoo, setBar },
       ));
+    });
+
+    it("should apply state changes before next onWillReceiveProps", () => {
+      const expected = {
+        test: true,
+        foo: true,
+        bar: false,
+      };
+      const composable = combine(
+        withState("foo", "setFoo", false),
+        withState("bar", "setBar", false),
+        onWillReceiveProps((_, {foo, setFoo}) => {
+          if (!foo) {
+            setFoo(true);
+          }
+        }),
+        onWillReceiveProps((_, {foo, bar, setBar}) => {
+          if (!bar && !foo) {
+            setBar(true);
+          }
+        }),
+        omitProps("setBar", "setFoo"),
+      );
+      const Assembly = assemble(composable)(Component);
+      const wrapper = shallow(<Assembly test={false} />);
+      wrapper.setProps({ test: true });
+      assert.deepEqual(wrapper.props(), expected);
+    });
+
+    it("should apply state changes before next callback", () => {
+      let passed: boolean[] = [];
+      const expected = [false, true];
+      const composable = combine(
+        withState("foo", "setFoo", false),
+        onWillReceiveProps((_, {foo, setFoo}) => {
+          if (!foo) {
+            setFoo(true);
+          }
+        }),
+        withProps((props) => {
+          passed.push(props.foo);
+          return {};
+        }),
+      );
+      const Assembly = assemble(composable)(Component);
+      const wrapper = shallow(<Assembly test={false} />);
+      wrapper.setProps({ test: true });
+      assert.deepEqual(passed, expected);
     });
   });
 });

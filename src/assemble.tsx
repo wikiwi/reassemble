@@ -12,7 +12,6 @@ import isReferentiallyTransparentFunctionComponent from "./utils/isReferentially
 
 type ComponentData = {
   props: any,
-  state: any,
   context: any,
   component: ReactAnyComponent,
   childContext?: any,
@@ -20,10 +19,23 @@ type ComponentData = {
 };
 
 type StateCallbackEntry = InstanceCallbackEntry<"stateCallback"> & {
-  init?: ComponentData;
-  called?: boolean;
-  startAt?: number;
+  init?: ComponentData,
+  called?: boolean,
+  startAt?: number,
 };
+
+type ComponentWillReceivePropsCallbackkEntry = InstanceCallbackEntry<"componentWillReceivePropsCallback"> & {
+  called?: boolean,
+};
+
+type PendingDataUpdate = {
+  dirty?: boolean,
+  init?: ComponentData,
+  startAt?: number,
+  callbacks?: SetStateCallback[],
+};
+
+type SetStateCallback = () => void;
 
 const hasWillReceivePropsCallback = (e: InstanceCallbackEntry<any>) => e.kind === "componentWillReceivePropsCallback";
 
@@ -33,8 +45,11 @@ class AssemblyBase<T> extends Component<T, any> {
   private callbackList: InstanceCallbackListTypesafe;
   private hasWillReceivePropsCallback: boolean;
   private computed: ComponentData;
+  private pendingDataUpdate: PendingDataUpdate = false;
   private newestProps: any;
   private newestContext: any;
+  private newestState: any = {};
+  private unmounted = false;
 
   constructor(
     blueprint: Blueprint,
@@ -50,34 +65,34 @@ class AssemblyBase<T> extends Component<T, any> {
     this.target = target;
     this.callbackList = blueprint.instanceCallbacks();
     this.hasWillReceivePropsCallback = this.callbackList.some(hasWillReceivePropsCallback);
-    this.computed = this.runInstanceCallbacks({ props, state: {}, context, component: this.target });
-    this.state = this.computed.state;
+    this.computed = this.runInstanceCallbacks({ props, context, component: this.target });
+    this.state = this.newestState;
   }
 
   public getChildContext() { return this.computed.childContext; }
   public componentWillMount() { return this.runLifeCycleCallbacks("componentWillMountCallback"); }
   public componentDidMount() { return this.runLifeCycleCallbacks("componentDidMountCallback"); }
-  public componentWillUnmount() { return this.runLifeCycleCallbacks("componentWillUnmountCallback"); }
+  public componentWillUnmount() {
+    this.unmounted = true;
+    return this.runLifeCycleCallbacks("componentWillUnmountCallback");
+  }
   public componentWillUpdate() { return this.runLifeCycleCallbacks("componentWillUpdateCallback"); }
   public componentDidUpdate() { return this.runLifeCycleCallbacks("componentDidUpdateCallback"); }
   public componentWillReceiveProps(nextProps: any, nextContext: any) {
     this.newestProps = nextProps;
     this.newestContext = nextContext;
-    this.rerunInstanceCallbacks({
+    this.handleDataUpdate({
       props: nextProps,
-      state: this.computed.state,
       context: nextContext,
       component: this.target,
     });
-    this.runLifeCycleCallbacks("componentWillReceivePropsCallback");
   }
 
   public shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {
-    if (!this.hasWillReceivePropsCallback) {
+    if (this.state !== nextState && !this.hasWillReceivePropsCallback) {
       // State based props was not computed before, do it now.
-      this.rerunInstanceCallbacks({
+      this.handleDataUpdate({
         props: nextProps,
-        state: nextState,
         context: nextContext,
         component: this.target,
       });
@@ -112,32 +127,65 @@ class AssemblyBase<T> extends Component<T, any> {
     if (callbacks) { callbacks.forEach((cb) => cb()); }
   }
 
-  private setStateWithLifeCycle(stateDiff: any, callback: () => void, init: ComponentData, startAt: number) {
-    if (this.hasWillReceivePropsCallback) {
-      // State needs to be considered for componentWillReceiveProps, so
-      // we process props on every state change.
-      if (!init) {
-        init = {
-          props: this.newestProps,
-          state: this.computed.state,
-          context: this.newestContext,
-          component: this.target,
-        };
-        startAt = 0;
-      }
-      this.rerunInstanceCallbacks({ ...init, state: { ...this.computed.state, ...stateDiff } }, startAt);
-      this.runLifeCycleCallbacks("componentWillReceivePropsCallback");
-    }
-    this.setState(stateDiff, callback);
+  private applyStateDiff(stateDiff: any) {
+    this.newestState = { ...this.newestState, ...stateDiff };
   }
 
-  private rerunInstanceCallbacks(init: ComponentData, startAt = 0) {
+  private setStateWithLifeCycle(
+    stateDiff: any,
+    callback: SetStateCallback,
+    init: ComponentData = this.defaultInit,
+    startAt: number = 0,
+  ) {
+    if (this.pendingDataUpdate) {
+      // we are in the middle of a data update.
+      if (!this.pendingDataUpdate.dirty || startAt < this.pendingDataUpdate.startAt) {
+        this.pendingDataUpdate.dirty = true;
+        this.pendingDataUpdate.init = init;
+        this.pendingDataUpdate.startAt = startAt;
+      }
+      if (callback) {
+        this.pendingDataUpdate.callbacks.push(callback);
+      }
+      this.applyStateDiff(stateDiff);
+    } else if (this.hasWillReceivePropsCallback) {
+      // runs callbacks with the new state which will run the `componentWillReceiveProps` lifecycle
+      this.handleDataUpdate(init, startAt, stateDiff, callback);
+    } else {
+      // state changes are batched and props will be recalculated in `shouldComponentUpdate`.
+      this.applyStateDiff(stateDiff);
+      this.setState(this.newestState, callback);
+    }
+  }
+
+  private get defaultInit(): ComponentData {
+    return {
+      props: this.newestProps,
+      context: this.newestContext,
+      component: this.target,
+    };
+  }
+
+  private handleDataUpdate(
+    init: ComponentData = this.defaultInit,
+    startAt: number = 0,
+    stateDiff: any = {},
+    callback: SetStateCallback = null,
+  ) {
+    const oldState = this.newestState;
+    if (stateDiff) {
+      this.applyStateDiff(stateDiff);
+    }
+    this.pendingDataUpdate = { callbacks: callback ? [callback] : [] };
     this.computed = this.runInstanceCallbacks(init, startAt);
-    const hasNewlyInitializedState = this.computed.state !== init.state;
-    if (hasNewlyInitializedState) {
-      this.setState(this.computed.state);
-      if (this.hasWillReceivePropsCallback) {
-        this.runLifeCycleCallbacks("componentWillReceivePropsCallback");
+    const callbacks = this.pendingDataUpdate.callbacks;
+    this.pendingDataUpdate = null;
+
+    if (this.newestState !== oldState) {
+      // Component could be unmounted because something during the lifecycle call can
+      // cause a parent component to unmount this before it completed its data update.
+      if (!this.unmounted) {
+        this.setState(this.newestState, () => callbacks.forEach((cb) => cb()));
       }
     }
   }
@@ -149,38 +197,40 @@ class AssemblyBase<T> extends Component<T, any> {
       const entry = this.callbackList[idx];
       switch (entry.kind) {
         case "propsCallback":
-          interim.props = entry.callback(interim.props, interim.state, interim.context);
+          interim.props = entry.callback(interim.props, this.newestState, interim.context);
           break;
         case "stateCallback":
-          const sc = entry as StateCallbackEntry;
-          if (this.hasWillReceivePropsCallback) {
-            sc.init = { ...interim };
-            sc.startAt = idx;
-          }
-          if (!sc.called) {
-            sc.called = true;
-            const initState = (name: string, value: any) => {
-              let unique = getUniqueKey(name, interim.state);
-              interim.state = { ...interim.state, [unique]: value };
-              const updater: StateUpdater<any> = (val, callback) => {
-                this.setStateWithLifeCycle({ [unique]: val }, callback, sc.init, sc.startAt);
+          {
+            const sc = entry as StateCallbackEntry;
+            if (this.hasWillReceivePropsCallback) {
+              sc.init = { ...interim };
+              sc.startAt = idx;
+            }
+            if (!sc.called) {
+              sc.called = true;
+              const initState = (name: string, value: any) => {
+                let unique = getUniqueKey(name, this.newestState);
+                this.applyStateDiff({ [unique]: value });
+                const updater: StateUpdater<any> = (val, callback) => {
+                  this.setStateWithLifeCycle({ [unique]: val }, callback, sc.init, sc.startAt);
+                };
+                return { name: unique, updater };
               };
-              return { name: unique, updater };
-            };
-            entry.callback(initState, interim.props, interim.state, interim.context);
+              entry.callback(initState, interim.props, this.newestState, interim.context);
+            }
           }
           break;
         case "childContextCallback":
-          interim.childContext = entry.callback(interim.childContext, interim.props, interim.state, interim.context);
+          interim.childContext = entry.callback(interim.childContext, interim.props, this.newestState, interim.context);
           break;
         case "skipCallback":
-          idx += entry.callback(interim.props, interim.state, interim.context);
+          idx += entry.callback(interim.props, this.newestState, interim.context);
           break;
         case "renderCallback":
-          interim.component = entry.callback(interim.component, interim.props, interim.state, interim.context);
+          interim.component = entry.callback(interim.component, interim.props, this.newestState, interim.context);
           break;
         case "lazyLoadCallback":
-          const list = entry.callback(interim.props, interim.state, interim.context);
+          const list = entry.callback(interim.props, this.newestState, interim.context);
           if (list && list.length > 0) {
             this.callbackList = [...this.callbackList.slice(0, idx + 1), ...list, ...this.callbackList.slice(idx + 1)];
             if (!this.hasWillReceivePropsCallback) {
@@ -189,20 +239,38 @@ class AssemblyBase<T> extends Component<T, any> {
           }
           break;
         case "componentWillReceivePropsCallback":
+          {
+            const cc = entry as ComponentWillReceivePropsCallbackkEntry;
+            const callback = entry.callback(interim.props, this.newestState, interim.context);
+            if (cc.called && this.pendingDataUpdate) {
+              // Props changed so we need to run this lifecycle.
+              callback();
+              if (this.pendingDataUpdate.dirty) {
+                // State changed during lifecycle, so we need to recalculated from an earlier position.
+                this.pendingDataUpdate.dirty = false;
+                return this.runInstanceCallbacks(this.pendingDataUpdate.init, this.pendingDataUpdate.startAt);
+              }
+            } else {
+              cc.called = true;
+            }
+          }
+          break;
         case "componentWillMountCallback":
         case "componentDidMountCallback":
         case "componentWillUnmountCallback":
         case "shouldComponentUpdateCallback":
         case "componentWillUpdateCallback":
         case "componentDidUpdateCallback":
-          const hasCallbacks = interim.lifeCycleCallbacks[entry.kind] !== undefined;
-          const callback = entry.callback(interim.props, interim.state, interim.context);
-          interim.lifeCycleCallbacks = {
-            ...interim.lifeCycleCallbacks,
-            [entry.kind]: hasCallbacks
-              ? [...interim.lifeCycleCallbacks[entry.kind], callback]
-              : [callback],
-          };
+          {
+            const hasCallbacks = interim.lifeCycleCallbacks[entry.kind] !== undefined;
+            const callback = entry.callback(interim.props, this.newestState, interim.context);
+            interim.lifeCycleCallbacks = {
+              ...interim.lifeCycleCallbacks,
+              [entry.kind]: hasCallbacks
+                ? [...interim.lifeCycleCallbacks[entry.kind], callback]
+                : [callback],
+            };
+          }
           break;
         default:
           throw new Error(`Unknown callback entry '${(entry as any).kind}'`);
