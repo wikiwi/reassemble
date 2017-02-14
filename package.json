@@ -1,6 +1,6 @@
 {
   "name": "reassemble",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "Fast Library for the Composition of React Higher-Order-Components",
   "homepage": "https://github.com/wikiwi/reassemble",
   "repository": {
