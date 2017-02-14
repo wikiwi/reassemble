@@ -4,7 +4,7 @@ import { ReactComponent, ReactAnyComponent } from "./types";
 import combine from "./combine";
 import resolveValue from "./utils/resolveValue";
 
-export type StateUpdater<T> = (newState: T, callback: () => void) => void;
+export type StateUpdater<T> = (newState: T, callback?: () => void) => void;
 
 export type StaticCallback = (componentClass: ComponentClass<any>, target: ReactComponent<any> | string) => void;
 
