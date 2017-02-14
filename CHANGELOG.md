@@ -1,3 +1,8 @@
+## 0.5.6 (February 14, 2017)
+
+- onWillReceiveProps now apply state immediately
+- Minor Typescript definition improvement
+
 ## 0.5.5 (February 11, 2017)
 
 - Fix state change after lazy loading issue
