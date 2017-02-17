@@ -231,6 +231,8 @@ Called during lifecycle `componentDidUpdate()`
 
 ## Roadmap
 
+- Compatibility with React Fiber
+- Improve Lifecycle handling
 - More performance optimizations
 - More tests
 
