@@ -179,6 +179,8 @@ Selectively keep props that are otherwise reverted in [`isolate()`](#isolate).
 
 ### Lifecycle
 
+_Warning: Lifecycle Composables are still experimental._
+
 #### `onWillMount()`
 
 ```ts
