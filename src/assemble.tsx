@@ -37,13 +37,10 @@ type PendingDataUpdate = {
 
 type SetStateCallback = () => void;
 
-const hasWillReceivePropsCallback = (e: InstanceCallbackEntry<any>) => e.kind === "componentWillReceivePropsCallback";
-
 class AssemblyBase<T> extends Component<T, any> {
   private target: ReactComponent<any> | string;
   private isReferentiallyTransparent: boolean;
   private callbackList: InstanceCallbackListTypesafe;
-  private hasWillReceivePropsCallback: boolean;
   private computed: ComponentData;
   private pendingDataUpdate: PendingDataUpdate = false;
   private newestProps: any;
@@ -64,7 +61,6 @@ class AssemblyBase<T> extends Component<T, any> {
     this.isReferentiallyTransparent = isReferentiallyTransparent;
     this.target = target;
     this.callbackList = blueprint.instanceCallbacks();
-    this.hasWillReceivePropsCallback = this.callbackList.some(hasWillReceivePropsCallback);
     this.computed = this.runInstanceCallbacks({ props, context, component: this.target });
     this.state = this.newestState;
   }
@@ -89,14 +85,6 @@ class AssemblyBase<T> extends Component<T, any> {
   }
 
   public shouldComponentUpdate(nextProps: any, nextState: any, nextContext: any) {
-    if (this.state !== nextState && !this.hasWillReceivePropsCallback) {
-      // State based props was not computed before, do it now.
-      this.handleDataUpdate({
-        props: nextProps,
-        context: nextContext,
-        component: this.target,
-      });
-    }
     const callbacks = this.computed.lifeCycleCallbacks.shouldComponentUpdateCallback;
     if (callbacks) {
       for (let i = 0; i < callbacks.length; i++) {
@@ -148,13 +136,9 @@ class AssemblyBase<T> extends Component<T, any> {
         this.pendingDataUpdate.callbacks.push(callback);
       }
       this.applyStateDiff(stateDiff);
-    } else if (this.hasWillReceivePropsCallback) {
+    } else {
       // runs callbacks with the new state which will run the `componentWillReceiveProps` lifecycle
       this.handleDataUpdate(init, startAt, stateDiff, callback);
-    } else {
-      // state changes are batched and props will be recalculated in `shouldComponentUpdate`.
-      this.applyStateDiff(stateDiff);
-      this.setState(this.newestState, callback);
     }
   }
 
@@ -202,10 +186,12 @@ class AssemblyBase<T> extends Component<T, any> {
         case "stateCallback":
           {
             const sc = entry as StateCallbackEntry;
-            if (this.hasWillReceivePropsCallback) {
-              sc.init = { ...interim };
-              sc.startAt = idx;
-            }
+            sc.init = {
+              ...interim,
+              // Whenever state changes, the previous `shouldComponentUpdate` callbacks becomes irrelevant.
+              lifeCycleCallbacks: { ...interim.lifeCycleCallbacks, shouldComponentUpdateCallback: [] },
+            };
+            sc.startAt = idx;
             if (!sc.called) {
               sc.called = true;
               const initState = (name: string, value: any) => {
@@ -233,9 +219,6 @@ class AssemblyBase<T> extends Component<T, any> {
           const list = entry.callback(interim.props, this.newestState, interim.context);
           if (list && list.length > 0) {
             this.callbackList = [...this.callbackList.slice(0, idx + 1), ...list, ...this.callbackList.slice(idx + 1)];
-            if (!this.hasWillReceivePropsCallback) {
-              this.hasWillReceivePropsCallback = list.some(hasWillReceivePropsCallback);
-            }
           }
           break;
         case "componentWillReceivePropsCallback":

@@ -109,6 +109,19 @@ describe("lifecycle", () => {
       assert.isTrue(didUpdate.notCalled);
     });
 
+    it("should not prevent rerender when state defined after callback changes", () => {
+      const didUpdate = spy();
+      const composable = combine(
+        shouldUpdate(() => false),
+        withState("foo", "setFoo", false),
+        onDidUpdate(didUpdate),
+      );
+      const Assembly = assemble(composable)(Component);
+      const wrapper = mount(<Assembly />);
+      wrapper.find(Component).props().setFoo(true);
+      assert.isTrue(didUpdate.called);
+    });
+
     it("should prevent rerender with multiple callbacks", () => {
       const didUpdate = spy();
       const composable = combine(
