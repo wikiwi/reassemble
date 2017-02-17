@@ -1,3 +1,7 @@
+## 0.5.7 (February 17, 2017)
+
+- Fix bug where `shouldUpdate` prevents legitmate rerender
+
 ## 0.5.6 (February 14, 2017)
 
 - onWillReceiveProps now apply state immediately
